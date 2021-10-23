@@ -21,14 +21,26 @@ export class Tab1Page implements OnInit {
     .subscribe(resp => {
       this.peliculasNuevas = resp.results;
     });
-    this.movieService.getPopulares()
-    .subscribe(resp =>{
-      console.log('Populares',resp);
-      this.populares = resp.results;
-    })
+
+    this.getPopulares();
+    
   }
 
+    cargarMas(){
+      this.getPopulares();
+  }
+
+  getPopulares(){
+    this.movieService.getPopulares()
+    .subscribe(resp =>{
+      const peliculasTemp =[...this.populares, ...resp.results];
+      this.populares = peliculasTemp;
+      
+    });
+  }
 }
+
+
 
 
 
